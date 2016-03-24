@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<!-- Craps Simulation -->
+<head>
+    <meta charset="utf-8" />
+    <title> Craps Simulation </title>
+
+    <script type="text/javascript">
+        // variables for the state of the game
+        var WON = 0, LOST = 1, ROLL_AGAIN = 2;
+
+        // variables for game play
+        var firstRoll = true;       // determine if new game has started
+        var diceSum = 0;            // sum of the current dice roll
+        var currentPoint = 0;       // if no win/loss, then record user's "point"
+        var gameStatus = ROLL_AGAIN;    // keep rolling
+
+        // function to handle game play
+        function play() {
+            if (firstRoll) {
+                diceSum = diceRoll();
+
+                switch (diceSum) {
+                    case 7:
+                    case 11:
+                        craps.point.value = "";
+                        gameStatus = WON;
+                        break;
+                    case 2:
+                    case 3:
+                    case 12:
+                        craps.point.value = "";
+                        gameStatus = LOST;
+                        break;
+                    default:
+                        gameStatus = ROLL_AGAIN;
+                        currentPoint = diceSum;
+                        craps.point.value = currentPoint;
+                        firstRoll = false;
+                }
+            }
+            else {
+                diceSum = diceRoll();
+
+                if (diceSum == currentPoint) {
+                    gameStatus = WON;
+                }
+                else if (diceSum == 7) {
+                    gameStatus = LOST;
+                }
+                else;
+            }
+
+            if (gameStatus == WON) {
+                alert("You won! Please roll again.");
+                firstRoll = true;
+            }
+            else if (gameStatus == LOST) {
+                alert("Sorry, you lost. Please roll again.");
+                firstRoll = true;
+            }
+            else {
+                alert("Continue rolling.");
+            }
+        }
+
+        // function to roll the dice
+        function diceRoll() {
+            var die1, die2, _sum;
+
+            die1 = Math.floor(1 + Math.random() * 6);
+            die2 = Math.floor(1 + Math.random() * 6);
+            _sum = die1 + die2;
+
+            // Display the roll values.
+            craps.firstDie.value = die1;
+            craps.secondDie.value = die2;
+            craps.sum.value = _sum;
+
+            return _sum;
+        }
+    </script>
+
+</head>
+<body>
+    <form name="craps">
+        <table border="1">
+            <tr><td> Die 1 </td><td><input name="firstDie" type="text" /></td></tr>
+            <tr><td> Die 2 </td><td><input name="secondDie" type="text" /></td></tr>
+            <tr><td> Sum </td><td><input name="sum" type="text" /></td></tr>
+            <tr><td> Point </td><td><input name="point" type="text" /></td></tr>
+            <tr><td><input type="button" value="Roll Dice" onclick="play()" /></td></tr>
+        </table>
+    </form>
+</body>
+</html>
