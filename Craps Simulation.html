@@ -67,15 +67,15 @@
 
         // function to roll the dice
         function diceRoll() {
-            var die1, die2, _sum;
+            var _die1, _die2, _sum;
 
-            die1 = Math.floor(1 + Math.random() * 6);
-            die2 = Math.floor(1 + Math.random() * 6);
+            _die1 = Math.floor(1 + Math.random() * 6);
+            _die2 = Math.floor(1 + Math.random() * 6);
             _sum = die1 + die2;
 
             // Display the roll values.
-            craps.firstDie.value = die1;
-            craps.secondDie.value = die2;
+            craps.die1.value = _die1;
+            craps.die2.value = _die2;
             craps.sum.value = _sum;
 
             return _sum;
@@ -86,8 +86,8 @@
 <body>
     <form name="craps">
         <table border="1">
-            <tr><td> Die 1 </td><td><input name="firstDie" type="text" /></td></tr>
-            <tr><td> Die 2 </td><td><input name="secondDie" type="text" /></td></tr>
+            <tr><td> Die 1 </td><td><input name="die1" type="text" /></td></tr>
+            <tr><td> Die 2 </td><td><input name="die2" type="text" /></td></tr>
             <tr><td> Sum </td><td><input name="sum" type="text" /></td></tr>
             <tr><td> Point </td><td><input name="point" type="text" /></td></tr>
             <tr><td><input type="button" value="Roll Dice" onclick="play()" /></td></tr>
